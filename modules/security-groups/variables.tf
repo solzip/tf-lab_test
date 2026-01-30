@@ -17,7 +17,14 @@ variable "vpc_id" {
 }
 
 variable "admin_ssh_cidrs" {
-  description = "CIDR blocks allowed to SSH to Bastion"
+  description = "CIDR blocks allowed to SSH to Bastion (관리자 IP만 허용)"
   type        = list(string)
-  default     = ["0.0.0.0/0"]
+
+  validation {
+    condition = alltrue([
+      for cidr in var.admin_ssh_cidrs :
+      cidr != "0.0.0.0/0"
+    ])
+    error_message = "보안상 0.0.0.0/0 (전체 공개)는 허용되지 않습니다. 관리자 IP를 명시적으로 지정하세요."
+  }
 }
