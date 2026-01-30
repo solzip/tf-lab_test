@@ -1,10 +1,10 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-01-30T02:20:05.824Z",
+  "lastUpdated": "2026-01-30T05:16:14.359Z",
   "activeFeatures": [
-    "local"
+    "security-hardening"
   ],
-  "primaryFeature": "local",
+  "primaryFeature": "security-hardening",
   "features": {
     "local": {
       "phase": "do",
@@ -17,6 +17,21 @@
         "started": "2026-01-30T01:04:16.008Z",
         "lastUpdated": "2026-01-30T01:04:16.008Z"
       }
+    },
+    "security-hardening": {
+      "phase": "design",
+      "phaseNumber": 2,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {
+        "plan": "docs/01-plan/features/20260130-security-hardening.plan.md",
+        "design": "docs/02-design/features/20260130-security-hardening.design.md"
+      },
+      "timestamps": {
+        "started": "2026-01-30T05:00:00.000Z",
+        "lastUpdated": "2026-01-30T05:00:00.000Z"
+      }
     }
   },
   "pipeline": {
@@ -27,7 +42,7 @@
   "session": {
     "startedAt": "2026-01-30T00:24:02.615Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-01-30T02:20:05.824Z"
+    "lastActivity": "2026-01-30T05:16:14.359Z"
   },
   "history": [
     {
@@ -35,6 +50,12 @@
       "feature": "local",
       "phase": "do",
       "action": "updated"
+    },
+    {
+      "timestamp": "2026-01-30T05:00:00.000Z",
+      "feature": "security-hardening",
+      "phase": "design",
+      "action": "created"
     }
   ]
 }

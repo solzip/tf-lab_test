@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-01-30T05:02:35.985Z",
+  "reason": "compaction",
+  "status": {
+    "version": "2.0",
+    "lastUpdated": "2026-01-30T04:51:16.761Z",
+    "activeFeatures": [
+      "local"
+    ],
+    "primaryFeature": "local",
+    "features": {
+      "local": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-01-30T01:04:16.008Z",
+          "lastUpdated": "2026-01-30T01:04:16.008Z"
+        }
+      }
+    },
+    "pipeline": {
+      "currentPhase": 1,
+      "level": "Dynamic",
+      "phaseHistory": []
+    },
+    "session": {
+      "startedAt": "2026-01-30T00:24:02.615Z",
+      "onboardingCompleted": false,
+      "lastActivity": "2026-01-30T04:51:16.761Z"
+    },
+    "history": [
+      {
+        "timestamp": "2026-01-30T01:04:16.008Z",
+        "feature": "local",
+        "phase": "do",
+        "action": "updated"
+      }
+    ]
+  }
+}
