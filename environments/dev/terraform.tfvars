@@ -56,7 +56,8 @@ db_engine_version = "8.0.35"
 db_instance_class = "db.t3.micro"
 db_name           = "devdb"
 db_username       = "devadmin"
-db_password       = "DevPassword123!"  # TODO: Use Secrets Manager in production
+# db_password는 이제 random_password로 자동 생성되어 Secrets Manager에 저장됨
+# db_password       = "DevPassword123!"  # ⚠️ 평문 비밀번호 사용 중단
 db_multi_az       = false  # Single AZ for dev
 
 ################################################################################

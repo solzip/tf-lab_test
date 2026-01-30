@@ -130,3 +130,22 @@ variable "db_multi_az" {
   type        = bool
   default     = false
 }
+
+# VPC Flow Logs
+variable "enable_flow_logs" {
+  description = "Enable VPC Flow Logs"
+  type        = bool
+  default     = true
+}
+
+variable "flow_logs_retention_days" {
+  description = "CloudWatch Logs retention in days"
+  type        = number
+  default     = 7
+}
+
+variable "flow_logs_traffic_type" {
+  description = "Type of traffic to log (ALL, ACCEPT, REJECT)"
+  type        = string
+  default     = "ALL"
+}
