@@ -60,6 +60,13 @@ db_password       = "DevPassword123!"  # TODO: Use Secrets Manager in production
 db_multi_az       = false  # Single AZ for dev
 
 ################################################################################
+# VPC Flow Logs
+################################################################################
+enable_flow_logs         = true
+flow_logs_retention_days = 7    # Dev: 7일 보존
+flow_logs_traffic_type   = "ALL"
+
+################################################################################
 # Tags
 ################################################################################
 # 공통 태그는 main.tf의 locals에서 자동 생성됨

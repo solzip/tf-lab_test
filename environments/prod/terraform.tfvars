@@ -62,6 +62,13 @@ db_password       = "ProductionPassword123!"  # TODO: Use Secrets Manager (REQUI
 db_multi_az       = true  # Multi-AZ for production
 
 ################################################################################
+# VPC Flow Logs
+################################################################################
+enable_flow_logs         = true
+flow_logs_retention_days = 30   # Prod: 30일 보존 (보안 감사용)
+flow_logs_traffic_type   = "ALL"
+
+################################################################################
 # Tags
 ################################################################################
 # 공통 태그는 main.tf의 locals에서 자동 생성됨

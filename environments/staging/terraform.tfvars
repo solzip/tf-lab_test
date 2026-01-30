@@ -61,6 +61,13 @@ db_password       = "StagingPassword123!"  # TODO: Use Secrets Manager
 db_multi_az       = true  # Multi-AZ for staging
 
 ################################################################################
+# VPC Flow Logs
+################################################################################
+enable_flow_logs         = true
+flow_logs_retention_days = 14   # Staging: 14일 보존
+flow_logs_traffic_type   = "ALL"
+
+################################################################################
 # Tags
 ################################################################################
 # 공통 태그는 main.tf의 locals에서 자동 생성됨
