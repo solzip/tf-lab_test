@@ -7,6 +7,11 @@ resource "aws_launch_template" "app" {
   image_id      = var.ami_id
   instance_type = var.instance_type
 
+  # IAM Instance Profile (보안 강화)
+  iam_instance_profile {
+    name = var.instance_profile_name
+  }
+
   network_interfaces {
     associate_public_ip_address = false
     security_groups             = [var.app_sg_id]
@@ -71,10 +76,10 @@ resource "aws_autoscaling_policy" "cpu_tracking" {
 
 # Bastion Host
 resource "aws_instance" "bastion" {
-  ami           = var.ami_id
-  instance_type = "t3.micro"
-  subnet_id     = var.public_subnet_ids[0]
-
+  ami                    = var.ami_id
+  instance_type          = "t3.micro"
+  subnet_id              = var.public_subnet_ids[0]
+  iam_instance_profile   = var.bastion_instance_profile_name
   vpc_security_group_ids = [var.bastion_sg_id]
 
   tags = {

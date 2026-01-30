@@ -1,6 +1,27 @@
 # modules/rds/main.tf
 # RDS 모듈
 
+################################################################################
+# Secrets Manager Integration (Optional)
+################################################################################
+
+# Secrets Manager에서 비밀번호 조회 (secret_arn이 제공된 경우)
+data "aws_secretsmanager_secret_version" "db_password" {
+  count     = var.secret_arn != "" ? 1 : 0
+  secret_id = var.secret_arn
+}
+
+locals {
+  # Secrets Manager 사용 시 JSON에서 password 추출, 아니면 변수 사용
+  db_credentials = var.secret_arn != "" ? jsondecode(data.aws_secretsmanager_secret_version.db_password[0].secret_string) : null
+  db_password    = local.db_credentials != null ? local.db_credentials.password : var.db_password
+  db_username    = local.db_credentials != null ? local.db_credentials.username : var.db_username
+}
+
+################################################################################
+# DB Subnet Group
+################################################################################
+
 resource "aws_db_subnet_group" "main" {
   name       = "${var.project_name}-${var.env_name}-db-subnet-group"
   subnet_ids = var.private_db_subnet_ids
@@ -58,11 +79,14 @@ resource "aws_db_instance" "main" {
   allocated_storage    = 20
   max_allocated_storage = 100
   storage_type         = "gp3"
-  storage_encrypted    = false
+
+  # 저장 시 암호화 (KMS)
+  storage_encrypted = var.enable_encryption
+  kms_key_id        = var.enable_encryption && var.kms_key_arn != "" ? var.kms_key_arn : null
 
   db_name  = var.db_name
-  username = var.db_username
-  password = var.db_password
+  username = local.db_username
+  password = local.db_password
 
   db_subnet_group_name   = aws_db_subnet_group.main.name
   vpc_security_group_ids = [var.db_sg_id]
@@ -82,7 +106,10 @@ resource "aws_db_instance" "main" {
   publicly_accessible       = false
 
   tags = {
-    Name = "${var.project_name}-${var.env_name}-rds"
+    Name        = "${var.project_name}-${var.env_name}-rds"
+    Encryption  = var.enable_encryption ? "Enabled" : "Disabled"
+    KMSKey      = var.kms_key_arn != "" ? "Custom" : "AWS Managed"
+    SecretsMgr  = var.secret_arn != "" ? "Enabled" : "Disabled"
   }
 
   lifecycle {

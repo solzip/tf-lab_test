@@ -67,3 +67,25 @@ variable "db_multi_az" {
   type        = bool
   default     = false
 }
+
+################################################################################
+# Security & Encryption Variables
+################################################################################
+
+variable "secret_arn" {
+  description = "ARN of Secrets Manager secret for DB password (optional)"
+  type        = string
+  default     = ""
+}
+
+variable "enable_encryption" {
+  description = "Enable storage encryption"
+  type        = bool
+  default     = true
+}
+
+variable "kms_key_arn" {
+  description = "ARN of KMS key for RDS encryption (optional, uses AWS managed key if not provided)"
+  type        = string
+  default     = ""
+}

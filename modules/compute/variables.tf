@@ -70,3 +70,18 @@ variable "user_data" {
   type        = string
   default     = ""
 }
+
+################################################################################
+# IAM Instance Profile Variables
+################################################################################
+
+variable "instance_profile_name" {
+  description = "IAM Instance Profile name for app instances"
+  type        = string
+}
+
+variable "bastion_instance_profile_name" {
+  description = "IAM Instance Profile name for bastion instance"
+  type        = string
+  default     = ""
+}
